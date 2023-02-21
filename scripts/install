@@ -146,6 +146,13 @@ ynh_script_progression --message="Initializing database..."
 initialize_db
 
 #=================================================
+# INITIALIZE DATABASE
+#=================================================
+ynh_script_progression --message="Collecting static..."
+
+collect_static
+
+##=================================================
 # SETUP SYSTEMD
 #=================================================
 ynh_script_progression --message="Configuring systemd services..." --weight=1
