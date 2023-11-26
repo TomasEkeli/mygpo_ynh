@@ -42,6 +42,16 @@ function set_up_virtualenv {
 	popd || ynh_dies
 }
 
+function collect_static {
+	env_path=$final_path/envs/prod
+	mkdir -p $env_path
+
+	pushd $final_path || ynh_die
+		chown -R $app:$app $final_path
+		ynh_exec_warn_less ynh_exec_as $app $final_path/venv/bin/envdir $env_path $final_path/venv/bin/python $final_path/manage.py collectstatic --noinput
+	popd || ynh_die
+}
+
 function initialize_db {
 	pushd $final_path || ynh_die
 		chown -R $app:$app $final_path
